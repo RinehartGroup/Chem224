@@ -1,0 +1,5 @@
+numpy
+jupyter
+ipykernel
+matplotlib
+nbformat
