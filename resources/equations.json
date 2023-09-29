@@ -1,1 +1,8 @@
-{}
+[
+    {
+        "name": "inner product",
+        "latex":   "$\\langle \\phi | \\psi \rangle = \\sum_{i=1}^{n} a_i^* b_i$",
+        "wikipedia": "https://en.wikipedia.org/wiki/Inner_product_space",
+        "description": "It's akin to the dot product in classical vector spaces but is way more general and powerful. Because it can essentially take the very complicated spaces of wavefunctions and linearize them - making any solution to the Schrödinger equation a vector in the Hilbert space (i.e a linear combination of some orthonormalized basis vectors)"
+    }
+]
