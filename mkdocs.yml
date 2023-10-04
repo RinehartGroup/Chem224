@@ -1,0 +1,52 @@
+site_name: Chem224
+site_description: Symmetry-based Approaches to Electronic Structure and Spectroscopy
+site_author: Jeff Rinehart
+nav:
+  - Home: index.md
+  - Lectures:
+      - L01: lectures/L01.ipynb
+  - Equations: equations.md
+
+theme:
+  name: material
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.next_prev
+    - navigation.expand
+    - navigation.top
+    - search.suggest
+    - search.highlight
+    - content.tabs.link
+    - content.code.annotation
+    - content.code.copy
+  language: en
+
+plugins:
+  - search
+  - mkdocs-jupyter
+  # - mkdocstrings:
+  #     handlers:
+  #       python:
+  #         paths: [.]
+  #         options:
+  #           show_root_heading: true
+  #           members_order: source
+  #           docstring_style: numpy
+watch:
+  - docs
+markdown_extensions:
+  - markdown_katex:
+      no_inline_svg: True
+      insert_fonts_css: True
+
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  #   - admonition
+  #   - footnotes
+  #   - pymdownx.details
+  #   - pymdownx.superfences
+  #   - pymdownx.mark
+  - attr_list
