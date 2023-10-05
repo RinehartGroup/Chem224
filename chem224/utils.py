@@ -27,7 +27,7 @@ def insert_equation(
     formatted_symbols = "\n".join(formatted_symbols)
 
     output: str = f"{heading_level * '#'} {eqn['name'].title()}\n\n"
-    output += f"$${eqn['latex']}$$\n\n"
+    output += f"{eqn['latex']}\n\n"
     output += f"{formatted_symbols}\n\n"
     output += f"{eqn['description']} ([Wikipedia]({eqn['wikipedia']}))\n"
 
