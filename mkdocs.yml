@@ -3,8 +3,9 @@ site_description: Symmetry-based Approaches to Electronic Structure and Spectros
 site_author: Jeff Rinehart
 nav:
   - Home: index.md
-  - Lectures:
-      - L01: lectures/L01.ipynb
+  - Lessons:
+      # - test: lessons/template_lecture.ipynb
+      - L01: lessons/L01.ipynb
   - Equations: equations.md
 
 theme:
