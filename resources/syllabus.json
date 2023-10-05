@@ -1,0 +1,37 @@
+{
+    "course_info": {
+      "course_name": "Chem224",
+      "instructor": "Jeffrey Rinehart",
+      "quarter": "Fall 2023",
+      "days": "TuTh",
+      "time": "12:30PM–1:50PM",
+      "location": "NSB 3211"
+    },
+    "lessons": [
+      {
+        "week_number": 0,
+        "lesson_number": 1,
+        "lesson_name": "Introduction to the Course",
+        "objectives": ["Understand course objectives", "Learn about grading"],
+        "key_concepts": ["Course objectives", "Grading"],
+        "key_equations": ["None"]
+      },
+      {
+        "week_number": 1,
+        "lesson_number": 1,
+        "lesson_name": "Introduction to Point Groups",
+        "objectives": ["Understand basic symmetry elements", "Learn point group notation"],
+        "key_concepts": ["Symmetry element", "Point group"],
+        "key_equations": ["Eq1"]
+      },
+      {
+        "week_number": 1,
+        "lesson_number": 2,
+        "lesson_name": "Molecular Orbital Theory",
+        "objectives": ["Understand MO theory basics", "Apply to simple molecules"],
+        "key_concepts": ["Molecular orbital", "Bonding"],
+        "key_equations": ["Eq2", "Eq3"]
+      }
+    ]
+  }
+  
