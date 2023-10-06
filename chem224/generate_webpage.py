@@ -18,6 +18,20 @@ Several changes need to be made to the raw notebook file before conversion:
 
     2. Detect markdown-formatted code cell output and convert it to an equivalent
         markdown cell
+
+
+Usage
+-----
+generate-webpage <input_file>
+    
+    where <input_file> is the path to the original notebook in the lessons/ directory.
+
+
+Example
+-------
+```
+generate-webpage .\lessons\template\template_lecture.ipynb
+```
 """
 import argparse
 import re
