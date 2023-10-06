@@ -22,6 +22,7 @@ dependencies = [
 
 [project.scripts]
 generate-webpage = "chem224.generate_webpage:main"
+generate-equations-webpage = "chem224.generate_equations_webpage:main"
 
 [tool.setuptools]
 packages = ["chem224"]

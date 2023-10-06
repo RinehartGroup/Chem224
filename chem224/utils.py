@@ -52,11 +52,11 @@ def insert_equation(
         raise EquationNotFoundError(f'Equation "{equation}" not found in {source.name}')
 
     symbols = eqn["symbols"]
-    formatted_symbols = ["- " + key + ": " + value for key, value in symbols.items()]
+    formatted_symbols = ["- $" + key + "$: " + value for key, value in symbols.items()]
     formatted_symbols = "\n".join(formatted_symbols)
 
     output: str = f"{heading_level * '#'} {eqn['name'].title()}\n\n"
-    output += f"{eqn['latex']}\n\n"
+    output += f"$${eqn['latex']}$$\n\n"
     output += f"{formatted_symbols}\n\n"
     output += f"{eqn['description']} ([Wikipedia]({eqn['wikipedia']}))\n"
 
