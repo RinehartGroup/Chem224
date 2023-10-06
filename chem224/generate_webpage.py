@@ -41,9 +41,8 @@ class CellConversion(Protocol):
         ...
 
 
-def image_path_conversion(
-    cell: nbformat.NotebookNode, **kwargs
-) -> nbformat.NotebookNode:
+def image_path_conversion(cell: nbformat.NotebookNode) -> nbformat.NotebookNode:
+    """Adjusts the path to images in markdown cells"""
     if cell["cell_type"] != "markdown":
         return cell
     cell_text: str = cell["source"]
@@ -55,23 +54,36 @@ def image_path_conversion(
     return cell
 
 
+def equation_cell_conversion(cell: nbformat.NotebookNode) -> nbformat.NotebookNode:
+    """Finds cells with markdown-formatted code cell output and converts them to
+    markdown cells"""
+    pattern = r"insert_equation\((.+)\)"
+    match = re.search(pattern, cell["source"])
+    if cell["cell_type"] != "code" or match is None:
+        return cell
+    new_cell = nbformat.NotebookNode()
+    new_cell["cell_type"] = "markdown"
+    new_cell["metadata"] = {}
+    new_cell["source"] = cell["outputs"][0]["data"]["text/markdown"]
+    return new_cell
+
+
 def make_edited_notebook(
     input_file: Path, output_file: Path, conversions: list[CellConversion]
 ) -> None:
-    original_notebook_dir = input_file.parent
     original_notebook = nbformat.read(input_file, as_version=nbformat.NO_CONVERT)
     edited_notebook = nbformat.v4.new_notebook()
 
     for cell in original_notebook.cells:
         for conversion in conversions:
-            cell = conversion(cell, parent_dir=original_notebook_dir)
+            cell = conversion(cell)
         edited_notebook.cells.append(cell)
     edited_notebook.metadata = original_notebook.metadata
     _, edited_notebook = nbformat.validator.normalize(edited_notebook)
     nbformat.write(edited_notebook, output_file, version=nbformat.NO_CONVERT)
 
 
-if __name__ == "__main__":
+def main() -> None:
     parser = argparse.ArgumentParser(
         description="Convert Jupyter Notebook to PDF using Pandoc."
     )
@@ -86,4 +98,12 @@ if __name__ == "__main__":
     web_nb: Path = Path(
         input_file.parent.parent.parent / "docs" / "lessons" / input_file.name
     )
-    make_edited_notebook(input_file, web_nb, conversions=[image_path_conversion])
+    make_edited_notebook(
+        input_file,
+        web_nb,
+        conversions=[image_path_conversion, equation_cell_conversion],
+    )
+
+
+if __name__ == "__main__":
+    main()
