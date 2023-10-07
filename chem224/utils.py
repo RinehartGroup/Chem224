@@ -1,20 +1,31 @@
 import json
 import os
 from pathlib import Path
+from typing import TypedDict
 
 from IPython.display import Markdown
 
 MAIN_DIR = Path(os.path.dirname(os.path.abspath(__file__))).parent
 
-EQUATIONS = MAIN_DIR / "docs" / "resources" / "equations.json"
+EQUATIONS_JSON = MAIN_DIR / "docs" / "resources" / "equations.json"
+
+EQUATIONS_MD = MAIN_DIR / "docs" / "equations.md"
 
 
 class EquationNotFoundError(Exception):
     pass
 
 
+class Equation(TypedDict):
+    name: str
+    latex: str
+    symbols: dict[str, str]
+    wikipedia: str
+    description: str
+
+
 def insert_equation(
-    equation: str, heading_level: int = 2, source: Path = EQUATIONS
+    equation: str, heading_level: int = 2, source: Path = EQUATIONS_JSON
 ) -> Markdown:
     """Used in a code cell in a Jupyter notebook to insert an equation from a reference
     json file and display it as Markdown with additional pieces of information about

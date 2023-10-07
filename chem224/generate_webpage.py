@@ -1,4 +1,4 @@
-"""
+r"""
 This script modifies a Jupyter notebook as written in the lessons/ directory to be
 formatted for the website.
 
@@ -34,12 +34,15 @@ generate-webpage .\lessons\template\template_lecture.ipynb
 ```
 """
 import argparse
+import json
 import re
 from pathlib import Path
 from typing import Any, Protocol
 import warnings
 
 import nbformat
+
+from chem224.utils import Equation, EQUATIONS_JSON
 
 warnings.filterwarnings("ignore", category=nbformat.validator.MissingIDFieldWarning)
 
@@ -48,7 +51,15 @@ class InputFileNotFoundError(Exception):
     pass
 
 
+# make custom WARNING for when an equation is not found
+class EquationNotFoundWarning(Warning):
+    pass
+
+
 class CellConversion(Protocol):
+    """CellConversion is a protocol for functions that perform some conversion on a
+    single cell in a Jupyter notebook."""
+
     def __call__(
         self, cell: nbformat.NotebookNode, **kwargs: Any
     ) -> nbformat.NotebookNode:
@@ -80,6 +91,34 @@ def equation_cell_conversion(cell: nbformat.NotebookNode) -> nbformat.NotebookNo
     new_cell["metadata"] = {}
     new_cell["source"] = cell["outputs"][0]["data"]["text/markdown"]
     return new_cell
+
+
+def linked_equation_conversion(cell: nbformat.NotebookNode) -> nbformat.NotebookNode:
+    """Searches markdown cells for the pattern '[EQ: <equation name>]' and replaces it
+    with the name of the equation as a link to the equation in the Equations webpage."""
+    pattern = r"@EQ: (.+?)@"
+    matches = list(re.finditer(pattern, cell["source"]))
+    if cell["cell_type"] != "markdown" or len(matches) == 0:
+        return cell
+    # check that the equation exists in the equations.json file
+    with open(EQUATIONS_JSON, "r", encoding="utf-8") as f:
+        equations: list[Equation] = json.load(f)
+    for match_ in matches:
+        for eqn in equations:
+            if eqn["name"].lower() == match_.group(1).lower():
+                cell_text: str = cell["source"]
+                equation_link = match_.group(1).lower().replace(" ", "-")
+                replacement = rf"[{match_.group(1)}](../../equations/#{equation_link})"
+                cell_text = re.sub(match_.group(0), replacement, cell_text, count=1)
+                cell["source"] = cell_text
+                break
+        else:
+            if match_.group(1) != "equation name":  # for template notebook
+                warnings.warn(
+                    f'Equation "{match_.group(1)}" not found in equations.json',
+                    EquationNotFoundWarning,
+                )
+    return cell
 
 
 def make_edited_notebook(
@@ -115,7 +154,11 @@ def main() -> None:
     make_edited_notebook(
         input_file,
         web_nb,
-        conversions=[image_path_conversion, equation_cell_conversion],
+        conversions=[
+            image_path_conversion,
+            equation_cell_conversion,
+            linked_equation_conversion,
+        ],
     )
 
 

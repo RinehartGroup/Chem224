@@ -7,25 +7,11 @@ Usage
 -----
 generate-equations-webpage
 """
-import os
 import re
 import json
 from pathlib import Path
-from typing import TypedDict
 
-MAIN_DIR = Path(os.path.dirname(os.path.abspath(__file__))).parent
-
-EQUATIONS_JSON = MAIN_DIR / "docs" / "resources" / "equations.json"
-
-EQUATIONS_MD = MAIN_DIR / "docs" / "equations.md"
-
-
-class Equation(TypedDict):
-    name: str
-    latex: str
-    symbols: dict[str, str]
-    wikipedia: str
-    description: str
+from chem224.utils import Equation, EQUATIONS_JSON, EQUATIONS_MD
 
 
 def read_equations(source: Path) -> list[Equation]:
