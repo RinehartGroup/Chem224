@@ -1,0 +1,32 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "chem224"
+version = "2023.1.0"
+description = "Chem224: Symmetry-based Approaches to Electronic Structure and Spectroscopy"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "numpy",
+    "jupyter",
+    "ipykernel",
+    "matplotlib",
+    "nbformat",
+    "mkdocs",
+    "mkdocs-material",
+    "mkdocs-jupyter",
+    "markdown-katex",
+]
+
+[project.scripts]
+generate-webpage = "chem224.generate_webpage:main"
+generate-equations-webpage = "chem224.generate_equations_webpage:main"
+
+[tool.setuptools]
+packages = ["chem224"]
+
+[project.urls]
+"GitHub" = "https://github.com/RinehartGroup/Chem224"
+"Course Website" = "https://rinehartgroup.github.io/Chem224/"
