@@ -3,3 +3,7 @@ jupyter
 ipykernel
 matplotlib
 nbformat
+mkdocs
+mkdocs-material
+mkdocs-jupyter
+markdown-katex

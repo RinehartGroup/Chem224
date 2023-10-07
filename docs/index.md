@@ -16,5 +16,3 @@ A symmetry-based approach to the electronic structure of molecular and extended 
 - **Days**: TuTh
 - **Time**: 12:30PM–1:50PM
 - **Location**: NSB 3211
-
-Website: https://rinehartgroup.github.io/Chem224/
