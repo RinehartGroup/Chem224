@@ -121,6 +121,7 @@ celerybeat.pid
 
 # Environments
 .chem224/
+.chem224/pyenv.cfg
 .env
 .venv
 env/
