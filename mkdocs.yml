@@ -6,6 +6,7 @@ nav:
   - Lessons:
       # - test: lessons/template_lecture.ipynb
       - L01: lessons/L01.ipynb
+      - L11: lessons/L11.ipynb
   - Equations: equations.md
 
 theme:
