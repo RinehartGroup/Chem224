@@ -16,11 +16,11 @@
         <link rel="prev" href="../..">
       
       
-        <link rel="next" href="../../equations/">
+        <link rel="next" href="../L11/">
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.4.3">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.4.5">
     
     
       
@@ -28,7 +28,7 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.79e020e9.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.6a10b989.min.css">
       
       
 
@@ -471,8 +471,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#5-coupling-constant" class="md-nav__link">
-    5. Coupling Constant
+  <a href="#5-symmetry-and-eigenvalues" class="md-nav__link">
+    5. Symmetry and Eigenvalues
   </a>
   
 </li>
@@ -491,6 +491,26 @@
   
 </nav>
       
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../L11/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Week 1-1: Symmetry and Point Group Review
+  </span>
+  
+
+      </a>
     </li>
   
 
@@ -655,8 +675,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#5-coupling-constant" class="md-nav__link">
-    5. Coupling Constant
+  <a href="#5-symmetry-and-eigenvalues" class="md-nav__link">
+    5. Symmetry and Eigenvalues
   </a>
   
 </li>
@@ -943,7 +963,7 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
     if (!diagrams.length) {
       return;
     }
-    const mermaid = (await import("https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.3.1/mermaid.esm.min.mjs")).default;
+    const mermaid = (await import("https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.5.0/mermaid.esm.min.mjs")).default;
     const parser = new DOMParser();
 
     mermaid.initialize({
@@ -1247,7 +1267,7 @@ $$</p>
 <li><p><strong>Symbols:</strong></p>
 <ul>
 <li>$A$: The operator</li>
-<li>$|\psi\rangle$: Eigenvector corresponding to eigenvalue <code>$\lambda$</code></li>
+<li>$|\psi\rangle$: Eigenvector corresponding to eigenvalue $\lambda$</li>
 <li>$\lambda$: Eigenvalue</li>
 </ul>
 </li>
@@ -1256,7 +1276,18 @@ Eigenvalues and eigenvectors give us the possible outcomes and states, respectiv
 </li>
 </ul>
 <hr/>
-<h4 id="example-of-spectral-decomposition">Example of Spectral Decomposition<a class="anchor-link" href="#example-of-spectral-decomposition">¶</a></h4><h4 id="hilbert-space-and-atomic-orbitals">Hilbert Space and Atomic Orbitals<a class="anchor-link" href="#hilbert-space-and-atomic-orbitals">¶</a></h4><p>In quantum mechanics, the state of a system is described by a vector in a Hilbert space. For atomic orbitals, the relevant Hilbert space is the space of square-integrable functions. Let's choose a simple basis for our Hilbert space, consisting of atomic orbitals:</p>
+<h4 id="example-of-spectral-decomposition">Example of Spectral Decomposition<a class="anchor-link" href="#example-of-spectral-decomposition">¶</a></h4><h4 id="hilbert-space-and-atomic-orbitals">Hilbert Space and Atomic Orbitals<a class="anchor-link" href="#hilbert-space-and-atomic-orbitals">¶</a></h4><p>In quantum mechanics, the state of a system is described by a vector in a Hilbert space. For atomic orbitals, the relevant Hilbert space is the space of square-integrable functions.
+We can define a square integrable function as one that satisfies the equation
+$$
+  \int_{-\infty}^{\infty} |\psi(\mathbf{r})|^2 d\mathbf{r} &lt; \infty
+  $$
+for all $\psi(\mathbf{r})$ in the Hilbert space. In Dirac notation, we can write this as
+$$
+  \langle \psi | \psi \rangle &lt; \infty
+  $$
+for all $| \psi \rangle$ in the Hilbert space. The condition that the wavefunction is square integrable is necessary for the inner product to be well-defined, but it need not include the entire Hilbert space. For instance, the space of spherical harmonics is a subspace of the space of square-integrable functions that is a useful basis for describing atomic orbitals.</p>
+<p>Let's look at a common example of a basis chosen from the subspace of spherical harmonics. The spherical harmonics are a complete orthonormal basis for the Hilbert space of square-integrable functions. Thus, according to the spectral theorem for Hilbert spaces, the spherical harmonics form a complete set of eigenfunctions for the Hamiltonian operator. Many families of functions can be used as a basis for the Hilbert space of square-integrable functions, but the spherical harmonics are particularly useful because they are eigenfunctions of the angular momentum operator so we can use them to describe atomic orbitals. Ideally we always want to use a basis that looks as close as possible to the answer we expect so that the basis we put in looks a lot like the basis we get out. We get much more intuitive results this way.</p>
+<p>Let's say we wanted to describe a particular molecular interaction involving a $-CH_2$ fragment and focus on the carbon orbitals in particular. Let's skip the actual functions for now and just assume we have orthonormal basis vectors described by the hydrogenic atomic orbitals. We can write these as e.g. $|1s\rangle$, $|2s\rangle$, $|2p_x\rangle$, $|2p_y\rangle$, and $|2p_z\rangle$, $|3s\rangle$, etc. We know that chemically, the most important orbitals are the $2s$ and $2p$ orbitals, so if we want to simplify our basis, we can limit it to</p>
 <p>$$
 \text{Basis} = \{ |2s\rangle, |2p_x\rangle, |2p_y\rangle, |2p_z\rangle \}
 $$</p>
@@ -1266,40 +1297,72 @@ $$</p>
 \hat{A} = \sum_i \lambda_i | u_i \rangle \langle u_i |
 $$</p>
 <p>Where $\lambda_i$ are the eigenvalues and $|u_i\rangle$ are the corresponding eigenvectors.</p>
-<p>For example, if we're considering the Hamiltonian operator $\hat{H}$, the eigenvalues $\lambda_i$ would be the energies $E_i$, and the $|u_i\rangle$ would be the eigenstates corresponding to these energies.</p>
-<h4 id="3-outer-products-and-operators">3. Outer Products and Operators<a class="anchor-link" href="#3-outer-products-and-operators">¶</a></h4><p>In the operator formalism of quantum mechanics, an outer product $|a\rangle \langle b|$ is an operator that acts on the vectors in the Hilbert space. The matrix representation of this operator depends on the basis chosen.</p>
-<p>For instance, consider an operator coupling $2s$ and $2p_x$ orbitals:</p>
+<p>For example, if we're considering the Hamiltonian operator $\hat{H}$, the eigenvalues $\lambda_i$ would be the energies $E_i$, and each element $| u_i \rangle \langle u_i |$ forms a projection operator that projects onto the eigenspace corresponding to the eigenvalue $E_i$ to form a complete set of basis vectors for the Hilbert space.</p>
+<p>In our example, the Hamiltonian operator would be:</p>
+<p>$$
+\hat{H} = E_{2s} |2s\rangle \langle 2s| + E_{2p_x} |2p_x\rangle \langle 2p_x| + E_{2p_y} |2p_y\rangle \langle 2p_y| + E_{2p_z} |2p_z\rangle \langle 2p_z|
+$$</p>
+<p>and the matrix representation of this operator in the given basis would be:</p>
+<p>$$
+\begin{pmatrix}
+E_{2s} &amp; 0 &amp; 0 &amp; 0 \\
+0 &amp; E_{2p_x} &amp; 0 &amp; 0 \\
+0 &amp; 0 &amp; E_{2p_y} &amp; 0 \\
+0 &amp; 0 &amp; 0 &amp; E_{2p_z}
+\end{pmatrix}
+$$</p>
+<h4 id="3-outer-products-and-operators">3. Outer Products and Operators<a class="anchor-link" href="#3-outer-products-and-operators">¶</a></h4><p>The power of forming a basis is that we can use it to describe any vector in the Hilbert space and any operator that acts on the vectors in the Hilbert space. This means we can form operators to describe interactions between any two vectors in the Hilbert space. In our example, let's say we know that the carbon will form an $sp$ hybrid orbital. This means that we can form an operator that describes the interaction between the $2s$ and $2p_x$ orbitals. In the operator formalism of quantum mechanics, this Outer Poduct, $|a\rangle \langle b|$, is</p>
 <p>$$
 \hat{J}_{s-px} = |2s\rangle \langle 2p_x| + |2p_x\rangle \langle 2s|
+$$</p>
+<p>and the total Hamiltonian operator would be:</p>
+<p>$$
+\hat{H} = E_{2s} |2s\rangle \langle 2s| + E_{2p_x} |2p_x\rangle \langle 2p_x| + E_{2p_y} |2p_y\rangle \langle 2p_y| + E_{2p_z} |2p_z\rangle \langle 2p_z| + J (|2s\rangle \langle 2p_x| + |2p_x\rangle \langle 2s|)
+$$</p>
+<p>or if we call the uncoupled Hamiltonian $\hat{H}_0$:</p>
+<p>$$
+\hat{H} = \hat{H}_0 + J_{s-p_x} (|2s\rangle \langle 2p_x| + |2p_x\rangle \langle 2s|)
 $$</p>
 <p>Its matrix form in the given basis would be:</p>
 <p>$$
 \begin{pmatrix}
-0 &amp; 1 &amp; 0 &amp; 0 \\
-1 &amp; 0 &amp; 0 &amp; 0 \\
-0 &amp; 0 &amp; 0 &amp; 0 \\
-0 &amp; 0 &amp; 0 &amp; 0
+E_{2s} &amp; J &amp; 0 &amp; 0 \\
+J &amp; E_{2p_x} &amp; 0 &amp; 0 \\
+0 &amp; 0 &amp; E_{2p_y} &amp; 0 \\
+0 &amp; 0 &amp; 0 &amp; E_{2p_z}
 \end{pmatrix}
 $$</p>
 <h4 id="4-symmetry-and-operators">4. Symmetry and Operators<a class="anchor-link" href="#4-symmetry-and-operators">¶</a></h4><p>An operator commutes with a symmetry operation if the system is invariant under that symmetry. For inversion symmetry:</p>
 <p>$$
 [\hat{I}, \hat{J}_{s-px}] = 0
 $$</p>
-<p>In our example, inversion symmetry restricts $J$ to be zero, as $2s$ and $2p_x$ behave differently under inversion.</p>
-<h4 id="5-coupling-constant">5. Coupling Constant<a class="anchor-link" href="#5-coupling-constant">¶</a></h4><p>Adding a coupling constant $J$ to $\hat{J}_{s-px}$:</p>
-<p>$$
-\hat{J}_{s-px} = J (|2s\rangle \langle 2p_x| + |2p_x\rangle \langle 2s|)
+<p>where $\hat{I}$ is the inversion operator.
+$\hat{J}_{s-px}$ is the operator describing the interaction between $2s$ and $2p_x$
+$[A,B]$ is a commutator which is defined as:
+$$
+[A, B] = AB - BA
 $$</p>
-<p>The matrix form becomes:</p>
+<p>In our example, inversion symmetry restricts $J$ to be zero, as $2s$ is gerade and $2p_x$ is ungerade:</p>
 <p>$$
-\begin{pmatrix}
-0 &amp; J &amp; 0 &amp; 0 \\
-J &amp; 0 &amp; 0 &amp; 0 \\
-0 &amp; 0 &amp; 0 &amp; 0 \\
-0 &amp; 0 &amp; 0 &amp; 0
-\end{pmatrix}
+\quad \hat{i} |2s\rangle = |2s\rangle \\
+\quad \hat{i} |2p_x\rangle = -|2p_x\rangle
 $$</p>
-<p>Here, $J$ controls the strength of the coupling between $2s$ and $2p_x$.</p>
+<p>This means that the terms $|2s\rangle \langle 2p_x|$ and $|2p_x\rangle \langle 2s|$ will cancel each other out to retain the symmetry of the system. This makes intuitive sense since inversion symmetry generates equal and opposite positive and negative wavefunction overlap between $2s$ and $2p_x$.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h4 id="5-symmetry-and-eigenvalues">5. Symmetry and Eigenvalues<a class="anchor-link" href="#5-symmetry-and-eigenvalues">¶</a></h4><p>Symmetry operations can also be used to determine the degeneracy of eigenvalues. For example, if we consider the $2p_x$ and $2p_y$ orbitals, we can see that they are degenerate because they are related by a symmetry operation:</p>
+<p>$$
+\hat{C}_{2z} |2p_x\rangle = |2p_y\rangle
+$$</p>
+<p>where $\hat{C}_{2z}$ is the $C_{2z}$ rotation operator. This means that the $2p_x$ and $2p_y$ orbitals retain their degeneracy under $C_{2z}$ rotation.</p>
 </div>
 </div>
 </div>
@@ -1367,10 +1430,10 @@ $$</p>
     </div>
     
     
-    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.next_prev", "navigation.expand", "navigation.top", "search.suggest", "search.highlight", "content.tabs.link", "content.code.annotation", "content.code.copy"], "search": "../../assets/javascripts/workers/search.a264c092.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.next_prev", "navigation.expand", "navigation.top", "search.suggest", "search.highlight", "content.tabs.link", "content.code.annotation", "content.code.copy"], "search": "../../assets/javascripts/workers/search.f886a092.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
-      <script src="../../assets/javascripts/bundle.6eac0284.min.js"></script>
+      <script src="../../assets/javascripts/bundle.aecac24b.min.js"></script>
       
     
   </body>
