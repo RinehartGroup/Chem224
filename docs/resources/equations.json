@@ -35,5 +35,25 @@
         },
         "wikipedia": "https://en.wikipedia.org/wiki/Outer_product",
         "description": "The outer product is a generalization of the cross product to any dimensionality. It expands the number of dimensions to define the total space of two or more vectors and creates a new Hilbert space. It translates operator language into matrix language (i.e. an abstract transformation into a representation of that transformation in a basis)."
+    },
+    {
+        "name": "inverse definition",
+        "latex": "A^{-1} A = I",
+        "symbols": {
+            "A": "a matrix",
+            "I": "the identity matrix"
+        },
+        "wikipedia": "https://en.wikipedia.org/wiki/Group_(mathematics)#Definition",
+        "description": "For any element $A$ in a group, there exists an inverse element $A^{-1}$ such that $A^{-1} A = I$ where $I$ is the identity element of the group."
+    },
+    {
+        "name": "group",
+        "latex": "G = \\{ A, B, C, \\cdots \\}",
+        "symbols": {
+            "G": "a group",
+            "A, B, C, \\cdots": "elements of the group"
+        },
+        "wikipedia": "https://en.wikipedia.org/wiki/Group_(mathematics)#Definition",
+        "description": "A group is a set of elements $G$ with a binary operation $\\cdot$ such that $G$ is closed under $\\cdot$, $\\cdot$ is associative, there exists an identity element $I$ such that $I \\cdot A = A \\cdot I = A$ for all $A \\in G$, and for every element $A \\in G$ there exists an inverse element $A^{-1}$ such that $A^{-1} \\cdot A = A \\cdot A^{-1} = I$."
     }
 ]
